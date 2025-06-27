@@ -3,4 +3,5 @@
     <string name="red">Red</string>
     <string name="blue">Blue</string>
     <string name="green">Green</string>
+    <string name="select_app_icon">Select App Icon</string>
 </resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "88809833531",
+    "project_id": "dynamicicon-b736b",
+    "storage_bucket": "dynamicicon-b736b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88809833531:android:d2d2ea43fed3258705c81e",
+        "android_client_info": {
+          "package_name": "com.mokh.dynamicappicon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlgdxDg4kdqRM28sM2zVWDozPXAq_UoIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,62 +5,80 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.dynamicappicon.model.AppIconModel
 import com.example.dynamicappicon.ui.theme.DynamicAppIconTheme
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 
 
 class MainActivity : ComponentActivity() {
+
     private val appIcons = AppIconModel.all()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        initRemoteConfig()
+
         setContent {
             DynamicAppIconTheme {
                 IconSelectorScreen(
                     appIcons = appIcons,
-                    currentIcon = getCurrentlyEnabledIcon(),
+                    currentIcon = getCurrentIcon(),
                     onIconSelected = { selectedIcon ->
-                        switchAppIcon(this, selectedIcon)
+                        updateAppIcon(selectedIcon)
                     }
                 )
             }
         }
     }
 
-    private fun switchAppIcon(context: Context, targetIcon: AppIconModel) {
-        val packageManager = context.packageManager
+    private fun initRemoteConfig() {
+        val remoteConfig = FirebaseRemoteConfig.getInstance()
+        val configSettings = FirebaseRemoteConfigSettings.Builder()
+            .setMinimumFetchIntervalInSeconds(10)
+            .build()
+
+        remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.setDefaultsAsync(mapOf("icon" to appIcons.first().aliasName))
+
+        remoteConfig.fetchAndActivate()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val aliasName = remoteConfig.getString("icon")
+                    appIcons.find { it.aliasName == aliasName }?.let { icon ->
+                        if (icon.aliasName == getCurrentIcon()?.aliasName) return@let
+                        updateAppIcon(icon)
+                    }
+                }
+            }
+    }
+
+    private fun updateAppIcon(targetIcon: AppIconModel) {
         appIcons.forEach { icon ->
-            val state = if (icon.aliasName == targetIcon.aliasName) {
+            val state = if (icon == targetIcon) {
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED
             } else {
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED
             }
-            setComponentState(context, packageManager, icon.aliasName, state)
+            setComponentState(icon.aliasName, state, packageManager)
         }
     }
 
-    private fun setComponentState(
-        context: Context,
-        packageManager: PackageManager,
-        aliasName: String,
-        newState: Int
-    ) {
-        val componentName = ComponentName(context, aliasName)
-        packageManager.setComponentEnabledSetting(
-            componentName,
-            newState,
-            PackageManager.DONT_KILL_APP
-        )
+    private fun setComponentState(aliasName: String, state: Int, pm: PackageManager) {
+        val component = ComponentName(this, aliasName)
+        pm.setComponentEnabledSetting(component, state, PackageManager.DONT_KILL_APP)
     }
-    private fun getCurrentlyEnabledIcon(): AppIconModel? {
+
+    private fun getCurrentIcon(): AppIconModel? {
         return appIcons.firstOrNull { icon ->
-            packageManager.getComponentEnabledSetting(
-                ComponentName(this, icon.aliasName)
-            ) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+            packageManager.getComponentEnabledSetting(ComponentName(this, icon.aliasName)) ==
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED
         }
     }
 }
