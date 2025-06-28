@@ -2,10 +2,8 @@ package com.example.dynamicappicon
 
 import IconSelectorScreen
 import android.content.ComponentName
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -16,20 +14,17 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 
 
 class MainActivity : ComponentActivity() {
-
     private val appIcons = AppIconModel.all()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-        initRemoteConfig()
-
         setContent {
             DynamicAppIconTheme {
                 IconSelectorScreen(
                     appIcons = appIcons,
                     currentIcon = getCurrentIcon(),
+                    onRemoteConfigEnabled = {initRemoteConfig()},
                     onIconSelected = { selectedIcon ->
                         updateAppIcon(selectedIcon)
                     }

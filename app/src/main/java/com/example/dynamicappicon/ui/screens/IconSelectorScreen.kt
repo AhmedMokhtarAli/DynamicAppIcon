@@ -1,3 +1,4 @@
+import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -11,11 +12,15 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
@@ -23,6 +28,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
@@ -49,10 +55,12 @@ import com.example.dynamicappicon.model.AppIconModel
 @Composable
 fun IconSelectorScreen(
     appIcons: List<AppIconModel>,
+    onRemoteConfigEnabled: () -> Unit,
     onIconSelected: (AppIconModel) -> Unit,
     currentIcon: AppIconModel? = null
 ) {
     var selectedIconIndex by remember { mutableStateOf<Int?>(appIcons.indexOfFirst { it.aliasName == currentIcon?.aliasName }) }
+    var isRemoteConfigEnabled by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -74,43 +82,66 @@ fun IconSelectorScreen(
             )
         }
     ) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .background(MaterialTheme.colorScheme.background),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            contentPadding = PaddingValues(vertical = 24.dp)
-        ) {
-            itemsIndexed(appIcons) { index, icon ->
-                // Simple scale animation when appearing
-                var visible by remember { mutableStateOf(false) }
-                val scale by animateFloatAsState(
-                    targetValue = if (visible) 1f else 0.8f,
-                    animationSpec = spring(dampingRatio = 0.6f)
+        Column(modifier = Modifier.padding(innerPadding)) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp, horizontal = 12.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(R.string.enable_remote_config),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                 )
+                Switch(checked = isRemoteConfigEnabled, onCheckedChange = { isChecked ->
+                    isRemoteConfigEnabled = isChecked
+                    if (isChecked)
+                        onRemoteConfigEnabled()
+                })
 
-                LaunchedEffect(Unit) {
-                    visible = true
-                }
+            }
+            Text(
+                text = stringResource(R.string.select_icon),
+                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp)
+            )
 
-                Box(
-                    modifier = Modifier
-                        .graphicsLayer {
-                            scaleX = scale
-                            scaleY = scale
-                            alpha = if (visible) 1f else 0f
-                        }
-                ) {
-                    AppIconButton(
-                        icon = icon,
-                        isSelected = selectedIconIndex == index,
-                        onClick = {
-                            selectedIconIndex = if (selectedIconIndex == index) null else index
-                            onIconSelected(icon)
-                        }
+            LazyRow(
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.background),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                contentPadding = PaddingValues(vertical = 8.dp, horizontal = 12.dp)
+            ) {
+                itemsIndexed(appIcons) { index, icon ->
+                    var visible by remember { mutableStateOf(false) }
+                    val scale by animateFloatAsState(
+                        targetValue = if (visible) 1f else 0.8f,
+                        animationSpec = spring(dampingRatio = 0.6f)
                     )
+
+                    LaunchedEffect(Unit) {
+                        visible = true
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .graphicsLayer {
+                                scaleX = scale
+                                scaleY = scale
+                                alpha = if (visible) 1f else 0f
+                            }
+                    ) {
+                        AppIconButton(
+                            icon = icon,
+                            isSelected = selectedIconIndex == index,
+                            onClick = {
+                                selectedIconIndex = if (selectedIconIndex == index) null else index
+                                onIconSelected(icon)
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -150,7 +181,8 @@ fun AppIconButton(
     )
     val strokeColor by animateColorAsState(
         targetValue = if (isSelected) Color.White else Color.Transparent,
-        animationSpec = tween(durationMillis = 200))
+        animationSpec = tween(durationMillis = 200)
+    )
 
     Card(
         modifier = Modifier
