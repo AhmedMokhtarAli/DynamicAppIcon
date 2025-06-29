@@ -52,6 +52,162 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityOrange"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_orange"
+            android:label="@string/orange"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityYellow"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_yellow"
+            android:label="@string/yellow"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityPurple"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_purple"
+            android:label="@string/purple"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityTeal"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_teal"
+            android:label="@string/teal"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityPink"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_pink"
+            android:label="@string/pink"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityIndigo"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_indigo"
+            android:label="@string/indigo"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityCyan"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_cyan"
+            android:label="@string/cyan"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityLime"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_lime"
+            android:label="@string/lime"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityDeepOrange"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_deep_orange"
+            android:label="@string/deep_orange"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityBrown"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_deep_brown"
+            android:label="@string/brown"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityGrey"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_grey"
+            android:label="@string/grey"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityBlueGrey"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_blue_grey"
+            android:label="@string/blue_grey"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
 
     </application>
 

@@ -7,6 +7,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.example.dynamicappicon.model.AppIconModel
 import com.example.dynamicappicon.ui.theme.DynamicAppIconTheme
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -21,19 +25,24 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DynamicAppIconTheme {
+                var remoteIcon by remember { mutableStateOf<AppIconModel?>(null) }
+
                 IconSelectorScreen(
                     appIcons = appIcons,
                     currentIcon = getCurrentIcon(),
-                    onRemoteConfigEnabled = {initRemoteConfig()},
+                    onRemoteConfigEnabled = {initRemoteConfig{ icon, url ->
+                        remoteIcon = icon
+                    }},
                     onIconSelected = { selectedIcon ->
                         updateAppIcon(selectedIcon)
-                    }
+                    },
+                    remoteIcon = remoteIcon
                 )
             }
         }
     }
 
-    private fun initRemoteConfig() {
+    private fun initRemoteConfig(onResult: (AppIconModel, String) -> Unit) {
         val remoteConfig = FirebaseRemoteConfig.getInstance()
         val configSettings = FirebaseRemoteConfigSettings.Builder()
             .setMinimumFetchIntervalInSeconds(10)
@@ -47,8 +56,10 @@ class MainActivity : ComponentActivity() {
                 if (task.isSuccessful) {
                     val aliasName = remoteConfig.getString("icon")
                     appIcons.find { it.aliasName == aliasName }?.let { icon ->
-                        if (icon.aliasName == getCurrentIcon()?.aliasName) return@let
-                        updateAppIcon(icon)
+//                        if (icon.aliasName == getCurrentIcon()?.aliasName) return@let
+//                        updateAppIcon(icon)
+
+                        onResult(icon, icon.aliasName)
                     }
                 }
             }

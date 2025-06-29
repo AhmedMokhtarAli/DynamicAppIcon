@@ -1,4 +1,3 @@
-import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -19,9 +18,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -57,7 +56,8 @@ fun IconSelectorScreen(
     appIcons: List<AppIconModel>,
     onRemoteConfigEnabled: () -> Unit,
     onIconSelected: (AppIconModel) -> Unit,
-    currentIcon: AppIconModel? = null
+    currentIcon: AppIconModel? = null,
+    remoteIcon: AppIconModel? = null,
 ) {
     var selectedIconIndex by remember { mutableStateOf<Int?>(appIcons.indexOfFirst { it.aliasName == currentIcon?.aliasName }) }
     var isRemoteConfigEnabled by remember { mutableStateOf(false) }
@@ -101,17 +101,33 @@ fun IconSelectorScreen(
                 })
 
             }
+            if (isRemoteConfigEnabled && remoteIcon != null)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp, horizontal = 12.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    AppIconButton(
+                        icon = remoteIcon,
+                        isSelected = true,
+                        onClick = {
+                            onIconSelected(remoteIcon)
+                        }
+                    )
+                }
             Text(
                 text = stringResource(R.string.select_icon),
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                 modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp)
             )
 
-            LazyRow(
+            LazyVerticalGrid(
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.background),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                columns = GridCells.Fixed(3),
                 contentPadding = PaddingValues(vertical = 8.dp, horizontal = 12.dp)
             ) {
                 itemsIndexed(appIcons) { index, icon ->
