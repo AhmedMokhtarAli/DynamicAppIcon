@@ -60,7 +60,7 @@ fun IconSelectorScreen(
     remoteIcon: AppIconModel? = null,
 ) {
     var selectedIconIndex by remember { mutableStateOf<Int?>(appIcons.indexOfFirst { it.aliasName == currentIcon?.aliasName }) }
-    var isRemoteConfigEnabled by remember { mutableStateOf(false) }
+    var isRemoteConfigEnabled by remember { mutableStateOf(remoteIcon != null) }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -96,8 +96,14 @@ fun IconSelectorScreen(
                 )
                 Switch(checked = isRemoteConfigEnabled, onCheckedChange = { isChecked ->
                     isRemoteConfigEnabled = isChecked
-                    if (isChecked)
+                    if (isChecked) {
+                        selectedIconIndex = null
                         onRemoteConfigEnabled()
+                    }
+                    else {
+                        selectedIconIndex = 0
+                        onIconSelected(appIcons[selectedIconIndex!!])
+                    }
                 })
 
             }
@@ -235,7 +241,8 @@ fun AppIconButton(
             Image(
                 painter = painterResource(icon.iconResId ?: R.drawable.ic_lanucher),
                 contentDescription = stringResource(icon.titleResId),
-                modifier = Modifier.fillMaxSize(),)
+                modifier = Modifier.fillMaxSize(),
+            )
         }
 
     }

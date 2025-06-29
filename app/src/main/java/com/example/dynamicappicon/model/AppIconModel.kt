@@ -26,23 +26,48 @@ data class AppIconModel(
     var iconResId: Int? = null
 ) {
     companion object {
-        fun all(): List<AppIconModel> = listOf(
-            AppIconModel("com.mokh.dynamicappicon.MainActivityRed", R.string.red, Red),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityGreen", R.string.green, Green),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityBlue", R.string.blue, Blue),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityOrange", R.string.orange, Orange),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityYellow", R.string.yellow, Yellow),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityPurple", R.string.purple, Purple),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityTeal", R.string.teal, Teal),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityPink", R.string.pink, Pink),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityIndigo", R.string.indigo, Indigo),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityCyan", R.string.cyan, Cyan),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityLime", R.string.lime, Lime),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityDeepOrange", R.string.deep_orange, DeepOrange),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityBrown", R.string.brown, Brown),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityGrey", R.string.grey, Grey),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityBlueGrey", R.string.blue_grey, BlueGrey),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityRamadan", R.string.ramadan, Color.White,isRemote = true,iconResId = R.drawable.ic_launcher_ramdan_foreground),
-            AppIconModel("com.mokh.dynamicappicon.MainActivityEidAdha", R.string.eid_adha, Color.White,isRemote = true, iconResId = R.drawable.ic_launcher_eid_adha_foreground))
+        fun all(): List<AppIconModel> = localIcons() + remoteIcons()
+
+        private fun localIcons(): List<AppIconModel> {
+            val localIconData = listOf(
+                Triple("MainActivityRed", R.string.red, Red),
+                Triple("MainActivityGreen", R.string.green, Green),
+                Triple("MainActivityBlue", R.string.blue, Blue),
+                Triple("MainActivityOrange", R.string.orange, Orange),
+                Triple("MainActivityYellow", R.string.yellow, Yellow),
+                Triple("MainActivityPurple", R.string.purple, Purple),
+                Triple("MainActivityTeal", R.string.teal, Teal),
+                Triple("MainActivityPink", R.string.pink, Pink),
+                Triple("MainActivityIndigo", R.string.indigo, Indigo),
+                Triple("MainActivityCyan", R.string.cyan, Cyan),
+                Triple("MainActivityLime", R.string.lime, Lime),
+                Triple("MainActivityDeepOrange", R.string.deep_orange, DeepOrange),
+                Triple("MainActivityBrown", R.string.brown, Brown),
+                Triple("MainActivityGrey", R.string.grey, Grey),
+                Triple("MainActivityBlueGrey", R.string.blue_grey, BlueGrey),
+            )
+
+            return localIconData.map { (aliasName, titleResId, color) ->
+                AppIconModel("com.mokh.dynamicappicon.$aliasName", titleResId, color)
+            }
+        }
+
+        private fun remoteIcons(): List<AppIconModel> = listOf(
+            AppIconModel(
+                "com.mokh.dynamicappicon.MainActivityRamadan",
+                R.string.ramadan,
+                Color.White,
+                isRemote = true,
+                iconResId = R.drawable.ic_launcher_ramdan_foreground
+            ),
+            AppIconModel(
+                "com.mokh.dynamicappicon.MainActivityEidAdha",
+                R.string.eid_adha,
+                Color.White,
+                isRemote = true,
+                iconResId = R.drawable.ic_launcher_eid_adha_foreground
+            )
+        )
     }
 }
+
