@@ -4,6 +4,7 @@ import IconSelectorScreen
 import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,6 +16,7 @@ import com.example.dynamicappicon.model.AppIconModel
 import com.example.dynamicappicon.ui.theme.DynamicAppIconTheme
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
+import kotlin.math.log
 
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +30,7 @@ class MainActivity : ComponentActivity() {
                 var remoteIcon by remember { mutableStateOf<AppIconModel?>(null) }
 
                 IconSelectorScreen(
-                    appIcons = appIcons,
+                    appIcons = appIcons.filter { it.isRemote.not() },
                     currentIcon = getCurrentIcon(),
                     onRemoteConfigEnabled = {initRemoteConfig{ icon, url ->
                         remoteIcon = icon
@@ -66,6 +68,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun updateAppIcon(targetIcon: AppIconModel) {
+        Log.d("sssssssssssssss", "updateAppIcon: ${targetIcon.aliasName}")
         appIcons.forEach { icon ->
             val state = if (icon == targetIcon) {
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED

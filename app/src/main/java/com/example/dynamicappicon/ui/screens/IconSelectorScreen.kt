@@ -78,7 +78,7 @@ fun IconSelectorScreen(
                     navigationIconContentColor = MaterialTheme.colorScheme.onSurface,
                     actionIconContentColor = MaterialTheme.colorScheme.onSurface,
                     scrolledContainerColor = MaterialTheme.colorScheme.surface,
-                ),
+                )
             )
         }
     ) { innerPadding ->
@@ -233,11 +233,9 @@ fun AppIconButton(
                 .clip(CircleShape)
         ) {
             Image(
-                painter = painterResource(R.drawable.ic_lanucher),
+                painter = painterResource(icon.iconResId ?: R.drawable.ic_lanucher),
                 contentDescription = stringResource(icon.titleResId),
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Fit,
-            )
+                modifier = Modifier.fillMaxSize(),)
         }
 
     }

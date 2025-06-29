@@ -18,4 +18,7 @@
     <string name="select_app_icon">Select App Icon</string>
     <string name="enable_remote_config">enable remote config</string>
     <string name="select_icon">select icon</string>
+    <string name="ramadan">Ramadan Kareem</string>
+    <string name="eid_adha">Eid Adha</string>
+
 </resources>

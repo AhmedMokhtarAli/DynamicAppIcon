@@ -28,6 +28,32 @@
         </activity-alias>
 
         <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityRamadan"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_ramadan"
+            android:label="@string/ramadan"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name="com.mokh.dynamicappicon.MainActivityEidAdha"
+            android:exported="true"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_eid_adha"
+            android:label="@string/eid_adha"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
             android:name="com.mokh.dynamicappicon.MainActivityBlue"
             android:enabled="false"
             android:exported="true"

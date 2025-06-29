@@ -21,7 +21,9 @@ import com.example.dynamicappicon.ui.theme.Yellow
 data class AppIconModel(
     val aliasName: String,
     val titleResId: Int,
-    val color: Color
+    val color: Color,
+    var isRemote: Boolean = false,
+    var iconResId: Int? = null
 ) {
     companion object {
         fun all(): List<AppIconModel> = listOf(
@@ -40,7 +42,7 @@ data class AppIconModel(
             AppIconModel("com.mokh.dynamicappicon.MainActivityBrown", R.string.brown, Brown),
             AppIconModel("com.mokh.dynamicappicon.MainActivityGrey", R.string.grey, Grey),
             AppIconModel("com.mokh.dynamicappicon.MainActivityBlueGrey", R.string.blue_grey, BlueGrey),
-
-            )
+            AppIconModel("com.mokh.dynamicappicon.MainActivityRamadan", R.string.ramadan, Color.White,isRemote = true,iconResId = R.drawable.ic_launcher_ramdan_foreground),
+            AppIconModel("com.mokh.dynamicappicon.MainActivityEidAdha", R.string.eid_adha, Color.White,isRemote = true, iconResId = R.drawable.ic_launcher_eid_adha_foreground))
     }
 }
