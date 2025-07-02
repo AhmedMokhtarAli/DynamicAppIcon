@@ -18,6 +18,8 @@ import com.example.dynamicappicon.ui.theme.Red
 import com.example.dynamicappicon.ui.theme.Teal
 import com.example.dynamicappicon.ui.theme.Yellow
 
+private const val APP_ID = "com.mokh.dynamicappicon"
+
 data class AppIconModel(
     val aliasName: String,
     val titleResId: Int,
@@ -25,6 +27,7 @@ data class AppIconModel(
     var isRemote: Boolean = false,
     var iconResId: Int? = null
 ) {
+
     companion object {
         fun all(): List<AppIconModel> = localIcons() + remoteIcons()
 
@@ -48,20 +51,20 @@ data class AppIconModel(
             )
 
             return localIconData.map { (aliasName, titleResId, color) ->
-                AppIconModel("com.mokh.dynamicappicon.$aliasName", titleResId, color)
+                AppIconModel(APP_ID+"."+aliasName, titleResId, color)
             }
         }
 
         private fun remoteIcons(): List<AppIconModel> = listOf(
             AppIconModel(
-                "com.mokh.dynamicappicon.MainActivityRamadan",
+                APP_ID+"."+"MainActivityRamadan",
                 R.string.ramadan,
                 Color.White,
                 isRemote = true,
                 iconResId = R.drawable.ic_launcher_ramdan_foreground
             ),
             AppIconModel(
-                "com.mokh.dynamicappicon.MainActivityEidAdha",
+                APP_ID+"."+"MainActivityEidAdha",
                 R.string.eid_adha,
                 Color.White,
                 isRemote = true,
@@ -70,4 +73,3 @@ data class AppIconModel(
         )
     }
 }
-
