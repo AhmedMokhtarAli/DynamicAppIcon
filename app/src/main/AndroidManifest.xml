@@ -16,7 +16,7 @@
             android:theme="@style/Theme.DynamicAppIcon" />
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityRed"
+            android:name="${main_activity_alias_red}"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_red"
             android:label="@string/red"
@@ -28,7 +28,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityRamadan"
+            android:name="${main_activity_alias_ramadan}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_ramadan"
@@ -41,7 +41,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityEidAdha"
+            android:name="${main_activity_alias_eid_adha}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_eid_adha"
@@ -54,7 +54,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityBlue"
+            android:name="${main_activity_alias_blue}"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_blue"
@@ -67,7 +67,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityGreen"
+            android:name="${main_activity_alias_green}"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_green"
@@ -79,7 +79,7 @@
             </intent-filter>
         </activity-alias>
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityOrange"
+            android:name="${main_activity_alias_orange}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_orange"
@@ -92,7 +92,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityYellow"
+            android:name="${main_activity_alias_yellow}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_yellow"
@@ -105,7 +105,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityPurple"
+            android:name="${main_activity_alias_purple}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_purple"
@@ -118,7 +118,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityTeal"
+            android:name="${main_activity_alias_teal}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_teal"
@@ -131,7 +131,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityPink"
+            android:name="${main_activity_alias_pink}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_pink"
@@ -144,7 +144,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityIndigo"
+            android:name="${main_activity_alias_indigo}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_indigo"
@@ -157,7 +157,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityCyan"
+            android:name="${main_activity_alias_cyan}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_cyan"
@@ -170,7 +170,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityLime"
+            android:name="${main_activity_alias_lime}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_lime"
@@ -183,7 +183,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityDeepOrange"
+            android:name="${main_activity_alias_deep_orange}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_deep_orange"
@@ -196,7 +196,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityBrown"
+            android:name="${main_activity_alias_brown}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_deep_brown"
@@ -209,7 +209,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityGrey"
+            android:name="${main_activity_alias_grey}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_grey"
@@ -222,7 +222,7 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.mokh.dynamicappicon.MainActivityBlueGrey"
+            android:name="${main_activity_alias_blue_grey}"
             android:exported="true"
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_blue_grey"
@@ -233,7 +233,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
-
 
     </application>
 

@@ -1,10 +1,7 @@
-package com.example.dynamicappicon
+package com.mokh.dynamicappicon
 
 import IconSelectorScreen
-import android.content.ComponentName
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -12,13 +9,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.example.dynamicappicon.data.AppIconRemoteConfig
-import com.example.dynamicappicon.helper.AppIconManager
-import com.example.dynamicappicon.model.AppIconModel
-import com.example.dynamicappicon.model.RemoteConfigKeys
-import com.example.dynamicappicon.ui.theme.DynamicAppIconTheme
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
+import com.mokh.dynamicappicon.data.AppIconRemoteConfig
+import com.mokh.dynamicappicon.helper.AppIconManager
+import com.mokh.dynamicappicon.model.AppIconModel
+import com.mokh.dynamicappicon.ui.theme.DynamicAppIconTheme
 
 
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.example.dynamicappicon.ui.theme
+package com.mokh.dynamicappicon.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

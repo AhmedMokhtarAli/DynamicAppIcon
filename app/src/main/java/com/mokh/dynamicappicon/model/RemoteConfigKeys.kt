@@ -1,4 +1,4 @@
-package com.example.dynamicappicon.model
+package com.mokh.dynamicappicon.model
 
 enum class RemoteConfigKeys(val key: String) {
     RAMADAN("ramadan"),

@@ -1,4 +1,4 @@
-package com.example.dynamicappicon
+package com.mokh.dynamicappicon
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,4 +1,4 @@
-package com.example.dynamicappicon
+package com.mokh.dynamicappicon
 
 import org.junit.Test
 

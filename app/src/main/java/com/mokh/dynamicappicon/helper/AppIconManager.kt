@@ -1,9 +1,9 @@
-package com.example.dynamicappicon.helper
+package com.mokh.dynamicappicon.helper
 
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
-import com.example.dynamicappicon.model.AppIconModel
+import com.mokh.dynamicappicon.model.AppIconModel
 
 class AppIconManager(private val context: Context) {
     private val packageManager = context.packageManager
