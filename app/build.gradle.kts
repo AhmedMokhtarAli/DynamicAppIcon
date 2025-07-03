@@ -1,61 +1,57 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.services)
 }
-val mainActivity = "com.mokh.dynamicappicon.MainActivity"
-val activityAliasRed = "com.mokh.dynamicappicon.MainActivityRed"
-val activityAliasRamadan = "com.mokh.dynamicappicon.MainActivityRamadan"
-val activityAliasEidAdha = "com.mokh.dynamicappicon.MainActivityEidAdha"
-val activityAliasBlue = "com.mokh.dynamicappicon.MainActivityBlue"
-val activityAliasGreen = "com.mokh.dynamicappicon.MainActivityGreen"
-val activityAliasOrange = "com.mokh.dynamicappicon.MainActivityOrange"
-val activityAliasYellow = "com.mokh.dynamicappicon.MainActivityYellow"
-val activityAliasPurple = "com.mokh.dynamicappicon.MainActivityPurple"
-val activityAliasTeal = "com.mokh.dynamicappicon.MainActivityTeal"
-val activityAliasPink = "com.mokh.dynamicappicon.MainActivityPink"
-val activityAliasIndigo = "com.mokh.dynamicappicon.MainActivityIndigo"
-val activityAliasCyan = "com.mokh.dynamicappicon.MainActivityCyan"
-val activityAliasLime = "com.mokh.dynamicappicon.MainActivityLime"
-val activityAliasDeepOrange = "com.mokh.dynamicappicon.MainActivityDeepOrange"
-val activityAliasBrown = "com.mokh.dynamicappicon.MainActivityBrown"
-val activityAliasGrey = "com.mokh.dynamicappicon.MainActivityGrey"
-val activityAliasBlueGrey = "com.mokh.dynamicappicon.MainActivityBlueGrey"
-
 android {
     namespace = "com.mokh.dynamicappicon"
     compileSdk = 35
 
+    val properties = Properties()
+    val configFile = project.rootProject.file("config")
+    if (configFile.canRead()) {
+        properties.load(FileInputStream(configFile))
+    }
+    fun Properties.getCleanProperty(key: String): String {
+        return getProperty(key)?.trim('"') ?: throw GradleException("Missing $key")
+    }
+
+    val mainActivity = properties.getCleanProperty("MAIN_ACTIVITY")
+    val activityAliases = mapOf(
+        "main_activity_alias_red" to properties.getCleanProperty("ACTIVITY_ALIAS_RED"),
+        "main_activity_alias_ramadan" to properties.getCleanProperty("ACTIVITY_ALIAS_RAMADAN"),
+        "main_activity_alias_eid_adha" to properties.getCleanProperty("ACTIVITY_ALIAS_EID_ADHA"),
+        "main_activity_alias_blue" to properties.getCleanProperty("ACTIVITY_ALIAS_BLUE"),
+        "main_activity_alias_green" to properties.getCleanProperty("ACTIVITY_ALIAS_GREEN"),
+        "main_activity_alias_orange" to properties.getCleanProperty("ACTIVITY_ALIAS_ORANGE"),
+        "main_activity_alias_yellow" to properties.getCleanProperty("ACTIVITY_ALIAS_YELLOW"),
+        "main_activity_alias_purple" to properties.getCleanProperty("ACTIVITY_ALIAS_PURPLE"),
+        "main_activity_alias_teal" to properties.getCleanProperty("ACTIVITY_ALIAS_TEAL"),
+        "main_activity_alias_pink" to properties.getCleanProperty("ACTIVITY_ALIAS_PINK"),
+        "main_activity_alias_indigo" to properties.getCleanProperty("ACTIVITY_ALIAS_INDIGO"),
+        "main_activity_alias_cyan" to properties.getCleanProperty("ACTIVITY_ALIAS_CYAN"),
+        "main_activity_alias_lime" to properties.getCleanProperty("ACTIVITY_ALIAS_LIME"),
+        "main_activity_alias_deep_orange" to properties.getCleanProperty("ACTIVITY_ALIAS_DEEP_ORANGE"),
+        "main_activity_alias_brown" to properties.getCleanProperty("ACTIVITY_ALIAS_BROWN"),
+        "main_activity_alias_grey" to properties.getCleanProperty("ACTIVITY_ALIAS_GREY"),
+        "main_activity_alias_blue_grey" to properties.getCleanProperty("ACTIVITY_ALIAS_BLUE_GREY")
+    )
     defaultConfig {
         applicationId = "com.mokh.dynamicappicon"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders.apply {
-            manifestPlaceholders.apply {
-                set("main_activity", mainActivity)
-                set("main_activity_alias_red", activityAliasRed)
-                set("main_activity_alias_ramadan", activityAliasRamadan)
-                set("main_activity_alias_eid_adha", activityAliasEidAdha)
-                set("main_activity_alias_blue", activityAliasBlue)
-                set("main_activity_alias_green", activityAliasGreen)
-                set("main_activity_alias_orange", activityAliasOrange)
-                set("main_activity_alias_yellow", activityAliasYellow)
-                set("main_activity_alias_purple", activityAliasPurple)
-                set("main_activity_alias_teal", activityAliasTeal)
-                set("main_activity_alias_pink", activityAliasPink)
-                set("main_activity_alias_indigo", activityAliasIndigo)
-                set("main_activity_alias_cyan", activityAliasCyan)
-                set("main_activity_alias_lime", activityAliasLime)
-                set("main_activity_alias_deep_orange", activityAliasDeepOrange)
-                set("main_activity_alias_brown", activityAliasBrown)
-                set("main_activity_alias_grey", activityAliasGrey)
-                set("main_activity_alias_blue_grey", activityAliasBlueGrey)
+            set("main_activity",mainActivity)
+            activityAliases.forEach{ key,value ->
+                set(key,value)
             }
         }
     }
@@ -69,46 +65,18 @@ android {
             )
             isMinifyEnabled = false
             buildConfigField("String", "main_activity", "\"$mainActivity\"")
-            buildConfigField("String", "main_activity_alias_red", "\"$activityAliasRed\"")
-            buildConfigField("String", "main_activity_alias_ramadan", "\"$activityAliasRamadan\"")
-            buildConfigField("String", "main_activity_alias_eid_adha", "\"$activityAliasEidAdha\"")
-            buildConfigField("String", "main_activity_alias_blue", "\"$activityAliasBlue\"")
-            buildConfigField("String", "main_activity_alias_green", "\"$activityAliasGreen\"")
-            buildConfigField("String", "main_activity_alias_orange", "\"$activityAliasOrange\"")
-            buildConfigField("String", "main_activity_alias_yellow", "\"$activityAliasYellow\"")
-            buildConfigField("String", "main_activity_alias_purple", "\"$activityAliasPurple\"")
-            buildConfigField("String", "main_activity_alias_teal", "\"$activityAliasTeal\"")
-            buildConfigField("String", "main_activity_alias_pink", "\"$activityAliasPink\"")
-            buildConfigField("String", "main_activity_alias_indigo", "\"$activityAliasIndigo\"")
-            buildConfigField("String", "main_activity_alias_cyan", "\"$activityAliasCyan\"")
-            buildConfigField("String", "main_activity_alias_lime", "\"$activityAliasLime\"")
-            buildConfigField("String", "main_activity_alias_deep_orange", "\"$activityAliasDeepOrange\"")
-            buildConfigField("String", "main_activity_alias_brown", "\"$activityAliasBrown\"")
-            buildConfigField("String", "main_activity_alias_grey", "\"$activityAliasGrey\"")
-            buildConfigField("String", "main_activity_alias_blue_grey", "\"$activityAliasBlueGrey\"")
+            activityAliases.forEach { key, value ->
+                buildConfigField("String", key, "\"$value\"")
+            }
         }
 
         debug {
             isDebuggable = true
             isMinifyEnabled = false
             buildConfigField("String", "main_activity", "\"$mainActivity\"")
-            buildConfigField("String", "main_activity_alias_red", "\"$activityAliasRed\"")
-            buildConfigField("String", "main_activity_alias_ramadan", "\"$activityAliasRamadan\"")
-            buildConfigField("String", "main_activity_alias_eid_adha", "\"$activityAliasEidAdha\"")
-            buildConfigField("String", "main_activity_alias_blue", "\"$activityAliasBlue\"")
-            buildConfigField("String", "main_activity_alias_green", "\"$activityAliasGreen\"")
-            buildConfigField("String", "main_activity_alias_orange", "\"$activityAliasOrange\"")
-            buildConfigField("String", "main_activity_alias_yellow", "\"$activityAliasYellow\"")
-            buildConfigField("String", "main_activity_alias_purple", "\"$activityAliasPurple\"")
-            buildConfigField("String", "main_activity_alias_teal", "\"$activityAliasTeal\"")
-            buildConfigField("String", "main_activity_alias_pink", "\"$activityAliasPink\"")
-            buildConfigField("String", "main_activity_alias_indigo", "\"$activityAliasIndigo\"")
-            buildConfigField("String", "main_activity_alias_cyan", "\"$activityAliasCyan\"")
-            buildConfigField("String", "main_activity_alias_lime", "\"$activityAliasLime\"")
-            buildConfigField("String", "main_activity_alias_deep_orange", "\"$activityAliasDeepOrange\"")
-            buildConfigField("String", "main_activity_alias_brown", "\"$activityAliasBrown\"")
-            buildConfigField("String", "main_activity_alias_grey", "\"$activityAliasGrey\"")
-            buildConfigField("String", "main_activity_alias_blue_grey", "\"$activityAliasBlueGrey\"")
+            activityAliases.forEach{ key, value ->
+                buildConfigField("String", key, "\"$value\"")
+            }
         }
 
     }
