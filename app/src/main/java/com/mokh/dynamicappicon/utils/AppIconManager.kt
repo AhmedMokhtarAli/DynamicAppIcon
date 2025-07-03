@@ -1,4 +1,4 @@
-package com.mokh.dynamicappicon.helper
+package com.mokh.dynamicappicon.utils
 
 import android.content.ComponentName
 import android.content.Context

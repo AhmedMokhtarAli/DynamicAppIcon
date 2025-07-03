@@ -1,12 +1,9 @@
 package com.mokh.dynamicappicon.data
 
-import com.mokh.dynamicappicon.model.AppIconModel
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import com.mokh.dynamicappicon.BuildConfig
-import com.mokh.dynamicappicon.data.AppIconRemoteConfig.Constants.ICON_KEY
-import com.mokh.dynamicappicon.data.AppIconRemoteConfig.Constants.ICON_VALUE_EID_ADHA
-import com.mokh.dynamicappicon.data.AppIconRemoteConfig.Constants.ICON_VALUE_RAMADAN
+import com.mokh.dynamicappicon.model.AppIconModel
+import com.mokh.dynamicappicon.data.RemoteIconsConstant.ICON_KEY
 
 class AppIconRemoteConfig() {
     private val remoteConfig = FirebaseRemoteConfig.getInstance()
@@ -36,20 +33,5 @@ class AppIconRemoteConfig() {
         .setMinimumFetchIntervalInSeconds(10)
         .build()
 
-    enum class RemoteConfigKeys(val value: String, val aliasName: String) {
-        RAMADAN(ICON_VALUE_RAMADAN, BuildConfig.main_activity_alias_ramadan),
-        EID_ADHA(ICON_VALUE_EID_ADHA, BuildConfig.main_activity_alias_eid_adha);
 
-        companion object {
-            fun fromValue(value: String): RemoteConfigKeys? {
-                return values().firstOrNull { it.value == value }
-            }
-        }
-    }
-
-    object Constants {
-        const val ICON_KEY = "icon"
-        const val ICON_VALUE_RAMADAN = "ramadan"
-        const val ICON_VALUE_EID_ADHA = "eid_adha"
-    }
 }

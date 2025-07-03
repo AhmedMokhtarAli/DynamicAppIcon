@@ -10,7 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.mokh.dynamicappicon.data.AppIconRemoteConfig
-import com.mokh.dynamicappicon.helper.AppIconManager
+import com.mokh.dynamicappicon.utils.AppIconManager
 import com.mokh.dynamicappicon.model.AppIconModel
 import com.mokh.dynamicappicon.ui.theme.DynamicAppIconTheme
 
