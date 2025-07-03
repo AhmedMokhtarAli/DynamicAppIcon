@@ -1,38 +1,43 @@
-# 🔀 DynamicAppIcon
+# 🧊 DynamicAppIcon
 
-An Android application that enables **dynamic launcher icon switching** based on:
-
-- ✅ Firebase **Remote Config** (to update icons remotely)
-- ✅ Local **user customization** (user-chosen icon themes)
-- ✅ `activity-alias` based icon switching via manifest placeholders
+A modern Android app that dynamically updates its launcher icon via **Firebase Remote Config** and also allows **local user customization** of icon themes. Built with **Kotlin**, **Jetpack Compose**, and the latest Android tools.
 
 ---
 
-## ✨ Features
+## 🚀 Features
 
-- 🎨 Dynamically switch launcher icons (themes: Red, Green, Blue, Ramadan, Eid, etc.)
-- ☁️ Supports remote updates via Firebase Remote Config
-- 👤 Local icon customization from user settings
-- 🔧 Configurable via external `config` file
-- 🧩 Clean Gradle integration with manifest placeholders
-- 📦 Easily extendable with new themes/icons
+- 🔁 **Dynamic Icon Switching**
+  - Control app icon remotely using Firebase Remote Config
+  - Easily change icons for themes like holidays, colors, events
 
----
+- 🎨 **User Icon Customization**
+  - Let users locally choose their preferred icon style
+  - Fully managed using `<activity-alias>` definitions
 
-## 🚀 Getting Started
+- 🔧 **Manifest Placeholder Injection**
+  - Icons and aliases are dynamically injected via placeholders from a `config` file
 
-### 📦 Prerequisites
-
-- Android Studio Hedgehog or newer
-- Kotlin 2.0.21, Gradle 8+
-- Firebase project with Remote Config set up
-- minSdk: 24, targetSdk: 35
+- ☁️ **Remote Config Integration**
+  - Firebase controls which alias is active remotely
+  - Supports rollout and fallback mechanisms
 
 ---
 
-## 🛠️ Setup Instructions
+## 🏗️ Tech Stack
 
-### 1. Clone the Repository
+- 🛠️ Kotlin `2.0.21`
+- ⚙️ Android Gradle Plugin `8.1.0+`
+- 🧱 Jetpack Compose
+- 🌐 Firebase Remote Config
+- 🧾 Manifest Placeholders and `activity-alias`
+- 🧪 Tested with **Android Studio Merkeët**
+
+---
+
+## 🛠️ Setup Guide
+
+1. **Clone the Repository**
 
 ```bash
-git https://github.com/AhmedMokhtarAli/DynamicAppIcon.git
+git clone https://github.com/AhmedMokhtarAli/DynamicAppIcon.git
+cd DynamicAppIcon
